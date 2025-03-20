@@ -66,6 +66,7 @@ class MyHomePage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: MarkdownViewer(
           markdown,
+          selectable: true,
           enableTaskList: true,
           enableSuperscript: false,
           enableSubscript: false,

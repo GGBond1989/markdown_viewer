@@ -259,9 +259,9 @@ class MarkdownRenderer implements NodeVisitor {
           height: _blockSpacing,
           // TODO(Zhiguang): Remove it when this issue is fixed:
           // https://github.com/flutter/flutter/issues/104548
-          child: selectable
-              ? const Text(' \n', selectionColor: Colors.transparent)
-              : null,
+          // child: selectable
+          //     ? const Text(' \n', selectionColor: Colors.transparent)
+          //     : null,
         ),
         isBlock && _tree.last.children.isNotEmpty,
       );

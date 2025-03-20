@@ -85,6 +85,7 @@ class CodeBlockBuilder extends MarkdownElementBuilder {
         children: [
           Scrollbar(
             child: SingleChildScrollView(
+              primary: true,
               scrollDirection: Axis.horizontal,
               padding: padding ?? defaultPadding,
               child: textWidget,
