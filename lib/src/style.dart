@@ -17,17 +17,30 @@ class MarkdownStyle {
     this.h4Padding = const EdgeInsets.only(bottom: 4),
     this.h5Padding = const EdgeInsets.only(bottom: 3),
     this.h6Padding = const EdgeInsets.only(bottom: 3),
+    this.h1Decoration = const BoxDecoration(
+      border: Border(
+        bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC)),
+      ),
+    ),
+    this.h2Decoration = const BoxDecoration(
+      border: Border(
+        bottom: BorderSide(width: 1.0, color: Color(0xFFCCCCCC)),
+      ),
+    ),
+    this.h3Decoration,
+    this.h4Decoration,
+    this.h5Decoration,
+    this.h6Decoration,
     this.paragraph,
-    this.paragraphPadding = const EdgeInsets.only(bottom: 12.0),
+    this.paragraphPadding,
     this.blockquote,
     this.blockquoteDecoration,
     this.blockquotePadding,
-    this.blockquoteContentPadding,
     this.footnoteReferenceDecoration,
     this.footnoteReferencePadding,
     this.dividerColor,
     this.dividerHeight,
-    this.dividerThickness,
+    this.dividerThickness = 3.0,
     this.emphasis,
     this.strongEmphasis,
     this.highlight,
@@ -56,7 +69,7 @@ class MarkdownStyle {
     this.codeBlock,
     this.codeblockPadding,
     this.codeblockDecoration,
-    this.blockSpacing = 8.0,
+    this.blockSpacing = 16.0,
     this.copyIconColor,
   });
 
@@ -73,12 +86,17 @@ class MarkdownStyle {
   final EdgeInsets? h4Padding;
   final EdgeInsets? h5Padding;
   final EdgeInsets? h6Padding;
+  final BoxDecoration? h1Decoration;
+  final BoxDecoration? h2Decoration;
+  final BoxDecoration? h3Decoration;
+  final BoxDecoration? h4Decoration;
+  final BoxDecoration? h5Decoration;
+  final BoxDecoration? h6Decoration;
   final TextStyle? paragraph;
   final EdgeInsets? paragraphPadding;
   final TextStyle? blockquote;
   final BoxDecoration? blockquoteDecoration;
   final EdgeInsets? blockquotePadding;
-  final EdgeInsets? blockquoteContentPadding;
   final BoxDecoration? footnoteReferenceDecoration;
   final EdgeInsets? footnoteReferencePadding;
   final Color? dividerColor;

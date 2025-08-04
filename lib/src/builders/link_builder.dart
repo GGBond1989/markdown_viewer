@@ -11,7 +11,7 @@ class LinkBuilder extends MarkdownElementBuilder {
   })  : _onTap = onTap,
         super(
           textStyle: const TextStyle(
-            color: Color(0xff2196f3),
+            color: Color(0xff0969da),
           ).merge(textStyle),
         );
 

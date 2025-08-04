@@ -98,22 +98,20 @@ class TableBuilder extends MarkdownElementBuilder {
     final type = element.type;
 
     if (type == 'table') {
-      return Scrollbar(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Table(
-            defaultColumnWidth:
-                tableColumnWidth ?? const IntrinsicColumnWidth(),
-            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-            border: tableBorder ?? _tableBorder,
-            children: _tableStack.removeLast().rows,
-          ),
+      return SingleChildScrollView(
+        padding: EdgeInsets.zero,
+        scrollDirection: Axis.horizontal,
+        child: Table(
+          defaultColumnWidth: tableColumnWidth ?? const IntrinsicColumnWidth(),
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          border: tableBorder ?? _tableBorder,
+          children: _tableStack.removeLast().rows,
         ),
       );
     } else if (type == 'tableHeadCell' || type == 'tableBodyCell') {
       final children = element.children;
 
-      _tableStack.single.rows.last.children!.add(
+      _tableStack.single.rows.last.children.add(
         TableCell(
           verticalAlignment: TableCellVerticalAlignment.top,
           child: Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/markdown_tree_element.dart';
 import 'builder.dart';
 
 class HeadlineBuilder extends MarkdownElementBuilder {
@@ -16,6 +17,12 @@ class HeadlineBuilder extends MarkdownElementBuilder {
     this.h4Padding,
     this.h5Padding,
     this.h6Padding,
+    this.h1Decoration,
+    this.h2Decoration,
+    this.h3Decoration,
+    this.h4Decoration,
+    this.h5Decoration,
+    this.h6Decoration,
   });
 
   TextStyle? headline1;
@@ -30,6 +37,13 @@ class HeadlineBuilder extends MarkdownElementBuilder {
   EdgeInsets? h4Padding;
   EdgeInsets? h5Padding;
   EdgeInsets? h6Padding;
+  BoxDecoration? h1Decoration;
+  BoxDecoration? h2Decoration;
+  BoxDecoration? h3Decoration;
+  BoxDecoration? h4Decoration;
+  BoxDecoration? h5Decoration;
+  BoxDecoration? h6Decoration;
+
 
   @override
   TextStyle? buildTextStyle(element, defaultStyle) {
@@ -57,4 +71,28 @@ class HeadlineBuilder extends MarkdownElementBuilder {
         "5": h5Padding,
         "6": h6Padding,
       }[element.attributes['level']];
+
+
+  @override
+  Widget? buildWidget(MarkdownTreeElement element, MarkdownTreeElement parent) {
+    final widget = super.buildWidget(element, parent);
+    final boxDecoration = {
+      "1": h1Decoration,
+      "2": h2Decoration,
+      "3": h3Decoration,
+      "4": h4Decoration,
+      "5": h5Decoration,
+      "6": h6Decoration,
+    }[element.attributes['level']];
+
+    if (boxDecoration == null) {
+      return widget;
+    }
+    
+    return Container(
+      width: double.infinity,
+      decoration: boxDecoration,
+      child: widget,
+    );
+  }
 }

@@ -14,7 +14,7 @@ import 'builders/link_builder.dart';
 import 'builders/list_builder.dart';
 import 'builders/paragraph_builder.dart';
 import 'builders/simple_inlines_builder.dart';
-import 'builders/table_bilder.dart';
+import 'builders/table_builder.dart';
 import 'builders/thematic_break_builder.dart';
 import 'definition.dart';
 import 'extensions.dart';
@@ -66,6 +66,12 @@ class MarkdownRenderer implements NodeVisitor {
         h4Padding: styleSheet.h4Padding,
         h5Padding: styleSheet.h5Padding,
         h6Padding: styleSheet.h6Padding,
+        h1Decoration: styleSheet.h1Decoration,
+        h2Decoration: styleSheet.h2Decoration,
+        h3Decoration: styleSheet.h3Decoration,
+        h4Decoration: styleSheet.h4Decoration,
+        h5Decoration: styleSheet.h5Decoration,
+        h6Decoration: styleSheet.h6Decoration,
       ),
       SimpleInlinesBuilder(
         context: context,
@@ -116,7 +122,6 @@ class MarkdownRenderer implements NodeVisitor {
         textStyle: styleSheet.blockquote,
         decoration: styleSheet.blockquoteDecoration,
         padding: styleSheet.blockquotePadding,
-        contentPadding: styleSheet.blockquoteContentPadding,
       ),
       ListBuilder(
         list: styleSheet.list,
@@ -256,6 +261,7 @@ class MarkdownRenderer implements NodeVisitor {
       // Add spacing between block elements
       _tree.last.children.addIfTrue(
         SizedBox(
+          // color: Colors.amber,
           height: _blockSpacing,
           // TODO(Zhiguang): Remove it when this issue is fixed:
           // https://github.com/flutter/flutter/issues/104548
@@ -263,7 +269,7 @@ class MarkdownRenderer implements NodeVisitor {
           //     ? const Text(' \n', selectionColor: Colors.transparent)
           //     : null,
         ),
-        isBlock && _tree.last.children.isNotEmpty,
+        isBlock && _tree.last.children.isNotEmpty &&  current.type != 'listItem' && parent.type != 'listItem',
       );
 
       if (widget is InlineWraper) {
@@ -286,7 +292,7 @@ class MarkdownRenderer implements NodeVisitor {
 
   /// Creates a [RichText] widget.
   Widget createRichText(
-    TextSpan text, {
+    InlineSpan text, {
     TextAlign? textAlign,
     StrutStyle? strutStyle,
   }) {

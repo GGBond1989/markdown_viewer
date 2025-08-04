@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/is_dark_mode.dart';
-import '../helpers/parse_block_padding.dart';
 import 'builder.dart';
 
 class BlockquoteBuilder extends MarkdownElementBuilder {
@@ -9,7 +8,6 @@ class BlockquoteBuilder extends MarkdownElementBuilder {
     super.context,
     TextStyle? textStyle,
     this.padding,
-    this.contentPadding,
     this.decoration,
   }) : super(
           textStyle: TextStyle(
@@ -20,7 +18,6 @@ class BlockquoteBuilder extends MarkdownElementBuilder {
         );
 
   final EdgeInsets? padding;
-  final EdgeInsets? contentPadding;
   final BoxDecoration? decoration;
 
   @override
@@ -28,7 +25,7 @@ class BlockquoteBuilder extends MarkdownElementBuilder {
 
   @override
   Widget? buildWidget(element, parent) {
-    final widget = Container(
+    return Container(
       width: double.infinity,
       decoration: decoration ??
           BoxDecoration(
@@ -41,16 +38,8 @@ class BlockquoteBuilder extends MarkdownElementBuilder {
               ),
             ),
           ),
-      padding: contentPadding ?? const EdgeInsets.only(left: 20),
+      padding: padding ?? const EdgeInsets.only(left: 20),
       child: super.buildWidget(element, parent),
     );
-
-    final parsedPadding = parseBlockPadding(padding, element.element.position);
-
-    if (parsedPadding == null) {
-      return widget;
-    }
-
-    return Padding(padding: parsedPadding, child: widget);
   }
 }

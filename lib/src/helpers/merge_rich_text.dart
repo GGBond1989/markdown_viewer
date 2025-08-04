@@ -19,9 +19,16 @@ List<Widget> mergeRichText(
     if (inlineStack.length == 1) {
       result.add(inlineStack.single);
     } else {
-      result.add(Wrap(
-        children: inlineStack,
-      ));
+      final inlineSpans = inlineStack.map((item) {
+        return item is RichText ? item.text : WidgetSpan(child: item);
+      }).toList();
+      result.add(
+        Wrap(
+          children: [
+            richTextBuilder(TextSpan(children: inlineSpans), null),
+          ],
+        ),
+      );
     }
 
     inlineStack = <Widget>[];
